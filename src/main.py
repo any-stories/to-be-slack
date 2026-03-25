@@ -106,7 +106,7 @@ def run() -> None:
 
     state = load_state()
 
-    if not settings.ONCE_PER_DAY:
+    if not settings.once_per_day:
         log.warning("ONCE_PER_DAY is disabled, running...")
         if notify(today_status, current_time):
             record_run(state)
@@ -152,7 +152,7 @@ def notify(today_status: dict[str, Any], current_time: datetime.datetime) -> boo
         message = renderer.render("message_template.jinja2", context)
         # log.info(f"Rendered message: {message}")
 
-        result = WeComBot(settings.WECOM_BOT_KEY).send(WeComMarkdown(content=message))
+        result = WeComBot(settings.wecom_bot.key).send(WeComMarkdown(content=message))
 
         if result.success:
             log.info(result.msg)

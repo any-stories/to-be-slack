@@ -34,6 +34,8 @@ jobs:
 
       - name: ▶️ Run script
         continue-on-error: true
+        env:
+          APP_CONFIG: ${{ secrets.APP_CONFIG }}
         run: |
           python src/main.py || echo "⚠️ Script failed, continuing to commit cache.json"
 
