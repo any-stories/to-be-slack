@@ -3,6 +3,7 @@ import json
 import random
 from pathlib import Path
 from typing import Any
+from zoneinfo import ZoneInfo
 import yaml
 from config import settings
 from core.message_builder import MessageContextBuilder
@@ -17,7 +18,9 @@ STATE_FILE = PROJECT_ROOT / ".state" / "state.json"
 WORKFLOW_YAML = PROJECT_ROOT / ".github" / "workflows" / "schedule-slack.yml"
 
 MAX_RECORDS = 7
-UTC_PLUS_8 = datetime.timezone(datetime.timedelta(hours=8))
+
+# UTC+8 datetime.timezone(datetime.timedelta(hours=8))
+BUSINESS_TZ = ZoneInfo("Asia/Shanghai")
 
 
 def load_state() -> dict[str, Any]:
@@ -38,8 +41,8 @@ def save_state(state: dict[str, Any]) -> None:
         log.error(f"Failed to save state: {e}")
 
 
-def has_executed_today(state: dict[str, Any], now: datetime.datetime) -> bool:
-    today = now.astimezone(datetime.timezone.utc).date()
+def has_executed_today(state: dict[str, Any], current_time: datetime.datetime) -> bool:
+    today = current_time.date()
 
     for record in state.get("run_history", []):
         try:
@@ -54,9 +57,7 @@ def has_executed_today(state: dict[str, Any], now: datetime.datetime) -> bool:
 
 def record_run(state: dict[str, Any]) -> None:
     history = state.get("run_history", [])
-    history.append(
-        {"timestamp": datetime.datetime.now(datetime.timezone.utc).isoformat()}
-    )
+    history.append({"timestamp": datetime.datetime.now().isoformat()})
     state["run_history"] = history[-MAX_RECORDS:]
     save_state(state)
 
@@ -79,6 +80,12 @@ def extract_workflow_crons() -> list[str]:
         return []
 
 
+def in_do_not_disturb_period(current_time: datetime.datetime) -> bool:
+    return settings.do_not_disturb_period and settings.do_not_disturb_period.is_active(
+        current_time
+    )
+
+
 def is_last_chance_today(crons: list[str], current_time: datetime.datetime) -> bool:
     if current_time is None:
         raise ValueError("Current time cannot be None")
@@ -86,6 +93,10 @@ def is_last_chance_today(crons: list[str], current_time: datetime.datetime) -> b
         return True
     for cron in crons:
         next_time = CronUtil.get_next_time(cron, current_time)
+        next_time_biz = next_time.astimezone(BUSINESS_TZ)
+        # DND
+        if in_do_not_disturb_period(next_time_biz):
+            continue
         # next_time > current_time
         if next_time.date() == current_time.date():
             return False
@@ -93,12 +104,21 @@ def is_last_chance_today(crons: list[str], current_time: datetime.datetime) -> b
 
 
 def run() -> None:
-    current_time = datetime.datetime.now(UTC_PLUS_8)
+    now_utc = datetime.datetime.now(datetime.UTC)
+    system_time = now_utc.astimezone()
+    business_time = now_utc.astimezone(BUSINESS_TZ)
     log.info(
-        f"Current time: {current_time.isoformat()} ({current_time.strftime('%A')})"
+        f"System time: {system_time.isoformat()} | "
+        f"Business time: {business_time.isoformat()} ({business_time:%A})"
     )
-    today = current_time.date()
 
+    if in_do_not_disturb_period(business_time):
+        log.info(
+            f"Current time {business_time.time()} is in DND period ({settings.do_not_disturb_period.start}-{settings.do_not_disturb_period.end}). Skipping."
+        )
+        return
+
+    today = business_time.date()
     today_status = HolidayUtil.get_day_status(today)
     if not today_status.get("is_workday", False):
         log.info(f"Today ({today} is not a workday. skipping.")
@@ -108,14 +128,14 @@ def run() -> None:
 
     if not settings.once_per_day:
         log.warning("ONCE_PER_DAY is disabled, running...")
-        if notify(today_status, current_time):
+        if notify(today_status, business_time):
             record_run(state)
             log.info("Task executed successfully.")
         else:
             log.warning(f"Task execution failed.")
         return
 
-    if has_executed_today(state, current_time):
+    if has_executed_today(state, system_time):
         log.info("Task has already executed today. Skipping.")
         return
 
@@ -127,7 +147,7 @@ def run() -> None:
     if bool(random.getrandbits(1)):
         log.info("Task decision: running task now.")
         should_execute = True
-    elif is_last_chance_today(crons, current_time):
+    elif is_last_chance_today(crons, system_time):
         log.info("Task decision: Last execution slot for today. Forced run.")
         should_execute = True
     else:
@@ -135,17 +155,17 @@ def run() -> None:
         log.info("Task decision: skipped for now, waiting for next scheduled slot.")
 
     if should_execute:
-        if notify(today_status, current_time):
+        if notify(today_status, business_time):
             record_run(state)
             log.info("Task executed successfully.")
         else:
             log.warning(f"Task execution failed.")
 
 
-def notify(today_status: dict[str, Any], current_time: datetime.datetime) -> bool:
+def notify(today_status: dict[str, Any], business_time: datetime.datetime) -> bool:
     try:
         context = MessageContextBuilder.build(
-            today_status=today_status, current_time=current_time, settings=settings
+            today_status=today_status, business_time=business_time, settings=settings
         )
 
         renderer = MessageRenderer()

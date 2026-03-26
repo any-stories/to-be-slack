@@ -122,17 +122,17 @@ class MessageContextBuilder:
     @staticmethod
     def build(
         today_status: dict[str, Any],
-        current_time: datetime.datetime,
+        business_time: datetime.datetime,
         settings: Settings,
     ) -> dict:
-        today = current_time.date()
+        today = business_time.date()
         context = {
             "today_status": today_status,
             "lunar_date": CalendarUtil.get_lunar_date(today),
-            "greeting": MessageContextBuilder.get_greeting_text(current_time.hour),
+            "greeting": MessageContextBuilder.get_greeting_text(business_time.hour),
             "header_text": "工作再累 一定不要忘记摸鱼哦 有事没事起身去茶水间去厕所去廊道走走 别老在工位上坐着 钱是老板的 但命是自己的",
             "year_progress_status": YearStats(
-                CalendarUtil.get_year_progress(current_time)
+                CalendarUtil.get_year_progress(business_time)
             ),
             "workweek_status": MessageContextBuilder.get_workweek_status(today),
             "festivals": CalendarUtil.get_upcoming_festivals(today, settings.festivals),
