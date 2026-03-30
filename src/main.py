@@ -169,7 +169,7 @@ def notify(today_status: dict[str, Any], business_time: datetime.datetime) -> bo
         )
 
         renderer = MessageRenderer()
-        message = renderer.render("message_template.jinja2", context)
+        message = renderer.render("message_wecom_md.jinja2", context)
         # log.info(f"Rendered message: {message}")
 
         result = WeComBot(settings.wecom_bot.key).send(WeComMarkdown(content=message))

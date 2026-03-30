@@ -17,11 +17,10 @@
 {# <font color="warning">{{ filled_bar }}</font><font color="comment">{{ empty_bar }}</font> <font color="{{ percent_color }}">{{ "%.2f"|format(year_progress_status.progress) }}%</font> #}
 {# 周末倒计时 #}
 {% if workweek_status.friday.is_today %}
-> 今天是周五,
-{% if workweek_status.tomorrow.is_workday %}
-  明天还得上班 😭
-{% else %}
-  明天休息啦 🎉
+> 今天是周五 {% if workweek_status.tomorrow.is_workday -%}
+明天还得上班😭
+{% else -%}
+明天休息啦🎉
 {% endif %}
 {% elif workweek_status.friday.days_until > 0 %}
 > 距离周五还有<font color="{% if workweek_status.friday.days_until <= 3 %}warning{% else %}info{% endif %}">{{ workweek_status.friday.days_until }}</font>天

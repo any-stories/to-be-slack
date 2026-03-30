@@ -1,0 +1,22 @@
+[🐟 摸鱼办] 温馨提示：今天是 {{ today_status.date.strftime("%Y-%m-%d") }} · {{ today_status.weekday_cn }}, {{ greeting }}~
+打工人已上线, 灵魂未连接, 今日KPI: 活着 + 下班
+
+已经混过 {{ "%.2f"|format(year_progress_status.progress) }}% 了
+(时间过得飞快, 工资涨得很慢)
+
+{% if workweek_status.friday.is_today %}
+今天周五{% if workweek_status.tomorrow.is_workday %}, 但别高兴太早, 明天还得打工😭{% else %}, 快乐自由人模式即将开启🎉{% endif %}
+{% elif workweek_status.friday.days_until > 0 %}
+离周五还有 {{ workweek_status.friday.days_until }} 天
+{% endif %}
+{% for festival in festivals %}
+{{ festival.name }}：还有 {{ festival.days }} 天
+{% endfor %}
+
+—— 🧠 今日摸鱼小贴士 ——
+✔ 打字要快, 看起来像在干活  
+✔ 走路要急, 像刚被安排任务  
+✔ 盯屏幕要深情, 仿佛在debug人生  
+
+—— 💤 今日状态总结 ——
+人坐在工位上, 心已经下班了。
