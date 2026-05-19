@@ -4,11 +4,16 @@ import random
 from pathlib import Path
 from typing import Any
 from zoneinfo import ZoneInfo
+
 import yaml
+
 from config import settings
-from core.message_builder import MessageContextBuilder
-from core.message_renderer import MessageRenderer
+
+from core.message.composer import MessageComposer
+from core.message.day_status import DayStatus
+
 from notification.channel.wecom import WeComBot, WeComMarkdown
+
 from utils.cron_util import CronUtil
 from utils.holiday_util import HolidayUtil
 from utils.logger import log
@@ -120,7 +125,7 @@ def run() -> None:
 
     today = business_time.date()
     today_status = HolidayUtil.get_day_status(today)
-    if not today_status.get("is_workday", False):
+    if not today_status.is_workday:
         log.info(f"Today ({today} is not a workday. skipping.")
         return
 
@@ -162,16 +167,13 @@ def run() -> None:
             log.warning(f"Task execution failed.")
 
 
-def notify(today_status: dict[str, Any], business_time: datetime.datetime) -> bool:
+def notify(day_status: DayStatus, business_time: datetime.datetime) -> bool:
     try:
-        context = MessageContextBuilder.build(
-            today_status=today_status, business_time=business_time, settings=settings
+        message = MessageComposer.compose(
+            day_status=day_status, business_time=business_time, settings=settings
         )
 
-        renderer = MessageRenderer()
-        message = renderer.render("message_wecom_md.jinja2", context)
-        # log.info(f"Rendered message: {message}")
-
+        # log.info(f"Rendered message: \n{message}")
         result = WeComBot(settings.wecom_bot.key).send(WeComMarkdown(content=message))
 
         if result.success:

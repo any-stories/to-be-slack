@@ -2,47 +2,26 @@ import os
 import json
 import datetime
 from dataclasses import dataclass, field
-from enum import Enum
+from enum import StrEnum
+
 from dotenv import load_dotenv
 
 from utils.logger import log
+
+from core.style.message_style import MessageStyle
+
+from core.festival import (
+    Festival,
+    FestivalPushMode,
+    DEFAULT_FESTIVALS,
+)
 
 # current_dir = Path(__file__).parent
 # dotenv_path = current_dir.parent / ".env"
 load_dotenv()
 
 
-@dataclass(frozen=True)
-class Festival:
-    name: str
-    type: str
-    enabled: bool = True
-    month: int | None = None
-    day: int | None = None
-    nth: int | None = None
-    weekday: int | None = None
-    term_name: str | None = None
-
-
-# type: fixed(公历), lunar(农历), week(某月第几个周几), term(节气)
-DEFAULT_FESTIVALS: tuple[Festival, ...] = (
-    Festival(name="元旦节", type="fixed", month=1, day=1),
-    Festival(name="春节", type="lunar", month=1, day=1),
-    Festival(name="情人节", type="fixed", month=2, day=14),
-    Festival(name="清明节", type="term", nth=6, term_name="清明"),
-    Festival(name="劳动节", type="fixed", month=5, day=1),
-    Festival(name="母亲节", type="week", month=5, nth=2, weekday=6),
-    Festival(name="端午节", type="lunar", month=5, day=5),
-    Festival(name="父亲节", type="week", month=6, nth=3, weekday=6),
-    Festival(name="七夕节", type="lunar", month=7, day=7),
-    Festival(name="中秋节", type="lunar", month=8, day=15),
-    Festival(name="国庆节", type="fixed", month=10, day=1),
-    Festival(name="黑色星期五", type="week", month=11, nth=4, weekday=4),
-    Festival(name="圣诞节", type="fixed", month=12, day=25),
-)
-
-
-class PushChannel(str, Enum):
+class PushChannel(StrEnum):
     WECOM_BOT = "wecom_bot"
     DINGTALK = "dingtalk"
 
@@ -94,6 +73,9 @@ class Settings:
 
     # Festivals
     festivals: tuple[Festival, ...] = field(default_factory=lambda: DEFAULT_FESTIVALS)
+    festival_push_mode: FestivalPushMode = FestivalPushMode.ALL
+
+    message_style: MessageStyle = MessageStyle.DEFAULT
 
     @classmethod
     def _parse_do_not_disturb(cls, cfg: dict) -> DoNotDisturbPeriod | None:
@@ -154,6 +136,10 @@ class Settings:
             wecom_bot=wecom_bot,
             dingtalk=dingtalk,
             festivals=festivals,
+            festival_push_mode=FestivalPushMode.from_value(
+                cfg.get("festival_push_mode")
+            ),
+            message_style=MessageStyle.from_value(cfg.get("message_style")),
         )
 
 

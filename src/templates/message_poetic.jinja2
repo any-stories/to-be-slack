@@ -1,0 +1,24 @@
+{# 序幕 #}
+{{ scene }}
+今日恰逢{{ day_status.date.strftime("%Y年%m月%d日") }}，正值{{ lunar_date.strftime("%o年%L%M月%D") }}，民间谓之周{{ day_status.weekday_cn_short }}。
+{{ greeting }}
+
+{{ tone.header }}
+
+{# 数据块 #}
+> {{ year_progress_status.render_wecom_html() }}
+{% if weekend_status.friday.is_today -%}
+> 恰是归沐之期，{% if weekend_status.tomorrow.is_workday %}然明日仍有案牍之劳😭{% else %}明朝即可寄情山水🎉{% endif %}
+{% elif weekend_status.friday.days_until > 0 -%}
+> 距憇息之暇，尚余<font color="{% if weekend_status.friday.days_until <= 3 %}warning{% else %}info{% endif %}">{{ weekend_status.friday.days_until }}</font>昼夜
+{% endif -%}
+{% for festival in festivals -%}
+> 祈愿佳节，距{{ festival.name }}犹有<font color="comment">{{ festival.days }}</font>日
+{% endfor %}
+
+{# 尾声 #}
+{{ tone.footer }}
+{%- if one_sentence %}
+
+—— {{ one_sentence.get('content', '') }} · {{ one_sentence.get('author', '未知') }}
+{%- endif %}

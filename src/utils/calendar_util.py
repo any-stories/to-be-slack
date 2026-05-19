@@ -1,11 +1,14 @@
 import datetime
 import calendar
 from borax.calendars.lunardate import LunarDate, TermUtils
-from config import Festival
+
+from core.festival import (
+    Festival,
+    FestivalType,
+)
 from utils.logger import setup_logger
 
 log = setup_logger("calendar")
-
 
 class CalendarUtil:
 
@@ -88,7 +91,6 @@ class CalendarUtil:
         cls,
         date_value: datetime.date | datetime.datetime | str | None = None,
         festivals: tuple[Festival, ...] = None,
-        include_disabled: bool = False,
     ) -> list[dict[str, str | int]]:
         """
         Get a list of upcoming festivals after the given date.
@@ -97,12 +99,9 @@ class CalendarUtil:
             List of dicts with keys: 'name', 'date', 'days'
         """
         if not festivals:
-            raise RuntimeError("No festivals available to calculate.")
-        reference = cls.normalize_date(date_value)
-        log.info(f"Calculating festivals after: {reference}")
+            return []
 
-        # Determine how many festivals to include
-        target_size = len([f for f in festivals if include_disabled or f.enabled])
+        reference = cls.normalize_date(date_value)
 
         results: list[dict[str, str | int]] = []
         seen_names: set[str] = set()
@@ -110,27 +109,28 @@ class CalendarUtil:
 
         # check next year as well
         for year in range(current_year, current_year + 2):
-            if len(results) >= target_size:
+            if len(results) >= len(festivals):
                 break
 
             for festival in festivals:
-                if not include_disabled and not festival.enabled:
-                    continue
                 if festival.name in seen_names:
                     continue
 
                 try:
                     target: datetime.date | None = None
                     match festival:
-                        case Festival(type="fixed", month=month, day=day):
+                        case Festival(type=FestivalType.FIXED, month=month, day=day):
                             target = datetime.date(year, month, day)
-                        case Festival(type="lunar", month=month, day=day):
+                        case Festival(type=FestivalType.LUNAR, month=month, day=day):
                             target = LunarDate(year, month, day).to_solar_date()
                         case Festival(
-                            type="week", month=month, nth=nth, weekday=weekday
+                            type=FestivalType.WEEK,
+                            month=month,
+                            nth=nth,
+                            weekday=weekday,
                         ):
                             target = cls.get_nth_weekday(year, month, nth, weekday)
-                        case Festival(type="term", nth=nth, term_name=term):
+                        case Festival(type=FestivalType.TERM, nth=nth, term_name=term):
                             target = TermUtils.nth_term_day(year, nth, term)
 
                     if target and target > reference:
