@@ -1,10 +1,5 @@
-from core.festival.festival import (
-    Festival,
-)
-
-from core.festival.festival_type import (
-    FestivalType,
-)
+from core.enums.festival_type import FestivalType
+from core.calendar.models.festival import Festival
 
 DEFAULT_FESTIVALS: tuple[Festival, ...] = (
     Festival(

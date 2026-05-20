@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 
-from core.style.condition.base_condition import BaseCondition
-from core.message.context import MessageContext
+from core.message.conditions.condition import Condition
+from core.message.models.context import MessageContext
 
-@dataclass(slots=True)
-class WeekdayCondition(BaseCondition):
+@dataclass(slots=True, kw_only=True)
+class WeekdayCondition(Condition):
 
     weekdays: set[int]
 

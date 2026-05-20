@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 
-from core.style.condition.base_condition import BaseCondition
-from core.message.context import MessageContext
-from core.style.day_period import DayPeriod
+from core.message.conditions.condition import Condition
+from core.message.models.context import MessageContext
+from core.enums.day_period import DayPeriod
 
 
-@dataclass(slots=True)
-class DayPeriodCondition(BaseCondition):
+@dataclass(slots=True, kw_only=True)
+class DayPeriodCondition(Condition):
 
     periods: set[DayPeriod]
 

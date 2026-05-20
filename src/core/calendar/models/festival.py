@@ -1,8 +1,6 @@
 from dataclasses import dataclass
 
-from core.festival.festival_type import (
-    FestivalType,
-)
+from core.enums.festival_type import FestivalType
 
 
 @dataclass(
@@ -24,7 +22,7 @@ class Festival:
     weekday: int | None = None
 
     term_name: str | None = None
-    
+
     enabled: bool = True
 
     is_public_holiday: bool = False

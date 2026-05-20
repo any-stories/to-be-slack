@@ -1,10 +1,7 @@
-from core.style.day_period import DayPeriod
-from core.style.message_pack import MessagePack
-from core.style.message_scene import MessageScene
-from core.style.message_tone import MessageTone
-
-from core.style.condition.weekday_condition import WeekdayCondition
-from core.style.condition.day_period_condition import DayPeriodCondition
+from core.enums.day_period import DayPeriod
+from core.message.models.pack import MessagePack
+from core.message.components import MessageScene, MessageTone
+from core.message.conditions import WeekdayCondition, DayPeriodCondition
 
 POETIC_STYLE = MessagePack(
     scenes=[
@@ -15,17 +12,17 @@ POETIC_STYLE = MessagePack(
         MessageScene(text="长风吹过来的时候，连时间的步履都慢了下来。"),
         MessageScene(
             text="新的一周正悄然递来序言，愿你翻开得足够轻盈。",
-            conditions=[WeekdayCondition({0})],
+            conditions=[WeekdayCondition(weekdays={0})],
         ),
         MessageScene(
             text="今天的城市，似乎在空气里提前藏好了下班的松弛感。",
-            conditions=[WeekdayCondition({4})],
+            conditions=[WeekdayCondition(weekdays={4})],
         ),
         MessageScene(
             text="傍晚的风是个藏不住秘密的信使，一开口就在催你回家了。",
             conditions=[
-                WeekdayCondition({3}),
-                DayPeriodCondition({DayPeriod.DUSK, DayPeriod.EVENING}),
+                WeekdayCondition(weekdays={3}),
+                DayPeriodCondition(periods={DayPeriod.DUSK, DayPeriod.EVENING}),
             ],
         ),
         MessageScene(text="所有日常都在无声推进 没有例外"),

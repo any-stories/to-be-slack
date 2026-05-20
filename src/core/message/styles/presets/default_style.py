@@ -1,9 +1,6 @@
-from core.style.day_period import DayPeriod
-
-from core.style.message_pack import MessagePack
-
-from core.style.message_scene import MessageScene
-from core.style.message_tone import MessageTone
+from core.enums.day_period import DayPeriod
+from core.message.models.pack import MessagePack
+from core.message.components import MessageScene, MessageTone
 
 DEFAULT_STYLE = MessagePack(
     scenes=[

@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from core.message.context import MessageContext
-from core.style.condition.base_condition import BaseCondition
+from core.message.models.context import MessageContext
+from core.message.conditions.condition import Condition
 
 
-@dataclass(slots=True)
-class WeekendStartCondition(BaseCondition):
+@dataclass(slots=True, kw_only=True)
+class WeekendStartCondition(Condition):
 
     def matches(
         self,

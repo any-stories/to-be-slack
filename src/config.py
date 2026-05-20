@@ -8,13 +8,9 @@ from dotenv import load_dotenv
 
 from utils.logger import log
 
-from core.style.message_style import MessageStyle
-
-from core.festival import (
-    Festival,
-    FestivalPushMode,
-    DEFAULT_FESTIVALS,
-)
+from core.enums import MessageStyle, FestivalPushMode
+from core.calendar.models.festival import Festival
+from core.calendar.festival_defaults import DEFAULT_FESTIVALS
 
 # current_dir = Path(__file__).parent
 # dotenv_path = current_dir.parent / ".env"

@@ -19,7 +19,7 @@ class FestivalType(StrEnum):
 
     TERM:
         Solar term based festival.
-        Example: 清明节
+        Example: 清明
     """
 
     FIXED = "fixed"

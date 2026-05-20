@@ -2,8 +2,7 @@ from dataclasses import dataclass
 import datetime
 
 from core.calendar.lunar_protocol import LunarDateProtocol
-from core.message.day_status import DayStatus
-from core.message.weekend_status import WeekendStatus
+from core.calendar.models import DayStatus, WeekendStatus
 
 
 @dataclass(slots=True)

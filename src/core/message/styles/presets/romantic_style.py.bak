@@ -1,15 +1,14 @@
-from core.style.day_period import DayPeriod
-from core.style.message_pack import MessagePack
-from core.style.message_scene import MessageScene
-from core.style.message_tone import MessageTone
-
-from core.style.condition.day_period_condition import DayPeriodCondition
-from core.style.condition.month_condition import MonthCondition
-
-from core.style.condition.weekday_condition import WeekdayCondition
-from core.style.condition.weekend_start_condition import WeekendStartCondition
-from core.style.season import Season
-from core.style.condition.season_condition import SeasonCondition
+from core.enums import DayPeriod, Season
+from core.message.models.pack import MessagePack
+from core.message.components import MessageScene, MessageTone
+from core.message.conditions import (
+    DayPeriodCondition,
+    MonthCondition,
+    SeasonCondition,
+    WeekdayCondition,
+    WeekendStartCondition,
+    FestivalCondition,
+)
 
 ROMANTIC_STYLE = MessagePack(
     scenes=[
@@ -22,17 +21,17 @@ ROMANTIC_STYLE = MessagePack(
         # 星期
         MessageScene(
             text="新的一周正悄然递来序言，愿你翻开得足够轻盈。",
-            conditions=[WeekdayCondition({0})],
+            conditions=[WeekdayCondition(weekdays={0})],
         ),
         MessageScene(
             text="今天的城市，似乎在空气里提前藏好了下班的松弛感。",
-            conditions=[WeekdayCondition({4})],
+            conditions=[WeekdayCondition(weekdays={4})],
         ),
         MessageScene(
             text="傍晚的风是个藏不住秘密的信使，一开口就在催你回家了。",
             conditions=[
-                WeekdayCondition({3}),
-                DayPeriodCondition({DayPeriod.DUSK, DayPeriod.EVENING}),
+                WeekdayCondition(weekdays={3}),
+                DayPeriodCondition(periods={DayPeriod.DUSK，DayPeriod.EVENING}),
             ],
         ),
         MessageScene(
@@ -42,160 +41,308 @@ ROMANTIC_STYLE = MessagePack(
         # 四季场景
         MessageScene(
             text="春天正在空气的每一个褶皱里，慢慢苏醒。",
-            conditions=[SeasonCondition({Season.SPRING})],
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
         ),
         MessageScene(
             text="风里携着些许潮湿而柔软的泥土气，那是春天的信件。",
-            conditions=[SeasonCondition({Season.SPRING})],
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
         ),
         MessageScene(
             text="夏天的白昼总是格外任性，把黄昏拉得无限长。",
-            conditions=[SeasonCondition({Season.SUMMER})],
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
         ),
         MessageScene(
             text="盛夏的滚烫热意，在空气里正横冲直撞。",
-            conditions=[SeasonCondition({Season.SUMMER})],
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
         ),
         MessageScene(
             text="风里终于舍得捎来几分秋天的清爽与克制。",
-            conditions=[SeasonCondition({Season.AUTUMN})],
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
         ),
         MessageScene(
             text="黄昏在秋天换了更温柔的涂料，在大地上描摹得格外缓慢。",
-            conditions=[SeasonCondition({Season.AUTUMN})],
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
         ),
         MessageScene(
             text="冬天大刀阔斧地剥离了喧嚣，让整个世界安静得像一幅画。",
-            conditions=[SeasonCondition({Season.WINTER})],
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
         ),
         MessageScene(
             text="空气里那抹极淡的寒意，让清晨的呼吸都变得清澈。",
-            conditions=[SeasonCondition({Season.WINTER})],
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
         ),
         # 月份场景
         MessageScene(
             text="一月的寒风里，还偷偷揉着些许未散的新年余温。",
-            conditions=[MonthCondition({1})],
+            conditions=[MonthCondition(months={1})],
         ),
         MessageScene(
             text="冬天的列车，把整座城市温柔地停靠在一月的站台。",
-            conditions=[MonthCondition({1})],
+            conditions=[MonthCondition(months={1})],
         ),
         MessageScene(
             text="岁月的长卷，正极其缓慢地展开新一年的第一页。",
-            conditions=[MonthCondition({1})],
+            conditions=[MonthCondition(months={1})],
         ),
         MessageScene(
             text="二月的空气里，回暖的春意正在泥土下悄悄排练。",
-            conditions=[MonthCondition({2})],
+            conditions=[MonthCondition(months={2})],
         ),
         MessageScene(
             text="三月是个温柔的旅人，随手把春天落在了街道中央。",
-            conditions=[MonthCondition({3})],
+            conditions=[MonthCondition(months={3})],
         ),
         MessageScene(
             text="空气里的风不小心撞翻了花期，满城都是酝酿中的香气。",
-            conditions=[MonthCondition({3})],
+            conditions=[MonthCondition(months={3})],
         ),
         MessageScene(
             text="春风正借着长街的掩护，在水泥森林里东奔西跑。",
-            conditions=[MonthCondition({3})],
+            conditions=[MonthCondition(months={3})],
         ),
         MessageScene(
             text="五月的晚风太撩人，总让人想多绕几条街再回家。",
-            conditions=[MonthCondition({5})],
+            conditions=[MonthCondition(months={5})],
         ),
         MessageScene(
             text="五月擅长用最细腻的笔触，把夜色染得毫无破绽。",
-            conditions=[MonthCondition({5})],
+            conditions=[MonthCondition(months={5})],
         ),
         MessageScene(
             text="空气里漂浮着刚刚破土的、属于初夏的轻快气息。",
-            conditions=[MonthCondition({5})],
+            conditions=[MonthCondition(months={5})],
         ),
         MessageScene(
             text="六月的白昼开始明目张胆地变长，向黑夜偷渡着日光。",
-            conditions=[MonthCondition({6})],
+            conditions=[MonthCondition(months={6})],
         ),
         MessageScene(
             text="夏天的触角正在城市里一点点蔓延，炽热且蓬勃。",
-            conditions=[MonthCondition({6})],
+            conditions=[MonthCondition(months={6})],
         ),
         MessageScene(
             text="傍晚的风卷起初夏的裙摆，带着微微发烫的试探。",
-            conditions=[MonthCondition({6})],
+            conditions=[MonthCondition(months={6})],
         ),
         MessageScene(
             text="七月的半空中，到处都漂浮着盛夏揉碎了的光芒。",
-            conditions=[MonthCondition({7})],
+            conditions=[MonthCondition(months={7})],
         ),
         MessageScene(
             text="无休止的蝉鸣，把整个七月吵闹得生机盎然。",
-            conditions=[MonthCondition({7})],
+            conditions=[MonthCondition(months={7})],
         ),
         MessageScene(
             text="城市的夏夜，总在路灯亮起的一瞬间缓慢发亮。",
-            conditions=[MonthCondition({7})],
+            conditions=[MonthCondition(months={7})],
         ),
         MessageScene(
             text="八月的晚风依旧执拗，怀里还揣着盛夏不肯放手的温度。",
-            conditions=[MonthCondition({8})],
+            conditions=[MonthCondition(months={8})],
         ),
         MessageScene(
             text="黄昏在八月最容易迷路，总是耽搁了很久才肯离去。",
-            conditions=[MonthCondition({8})],
+            conditions=[MonthCondition(months={8})],
         ),
         MessageScene(
             text="滚烫的夜色与不知疲倦的蝉鸣，瓜分了整个八月的梦境。",
-            conditions=[MonthCondition({8})],
+            conditions=[MonthCondition(months={8})],
         ),
         MessageScene(
             text="九月的风终于学会了妥协，开始有了秋天的沉静味道。",
-            conditions=[MonthCondition({9})],
+            conditions=[MonthCondition(months={9})],
         ),
         MessageScene(
             text="白昼正不露声色地变短，向夜晚交出它的疆域。",
-            conditions=[MonthCondition({9})],
+            conditions=[MonthCondition(months={9})],
         ),
         MessageScene(
             text="初秋的风毫无目的，只是轻轻地把落叶吹进城市的怀抱。",
-            conditions=[MonthCondition({9})],
+            conditions=[MonthCondition(months={9})],
         ),
         MessageScene(
             text="十月是个慷慨的画师，把每一个黄昏都拉得极长极远。",
-            conditions=[MonthCondition({10})],
+            conditions=[MonthCondition(months={10})],
         ),
         MessageScene(
             text="风开始变得清爽，在没有人的角落里独自安静。",
-            conditions=[MonthCondition({10})],
+            conditions=[MonthCondition(months={10})],
         ),
         MessageScene(
             text="秋天踩着金黄的碎屑，正在街道之间缓慢且盛大地铺开。",
-            conditions=[MonthCondition({10})],
+            conditions=[MonthCondition(months={10})],
         ),
         MessageScene(
             text="十一月的夜晚开始有了锋芒，风里藏着些许微凉的叮嘱。",
-            conditions=[MonthCondition({11})],
+            conditions=[MonthCondition(months={11})],
         ),
         MessageScene(
             text="空气里的温度在往下坠，那是冬日在步步靠近的足音。",
-            conditions=[MonthCondition({11})],
+            conditions=[MonthCondition(months={11})],
         ),
         MessageScene(
             text="黄昏在十一月退场得极快，留下一地安静的暮色。",
-            conditions=[MonthCondition({11})],
+            conditions=[MonthCondition(months={11})],
         ),
         MessageScene(
             text="十二月把城市的霓虹点亮，冷冬里的灯光总显得格外温暖。",
-            conditions=[MonthCondition({12})],
+            conditions=[MonthCondition(months={12})],
+            bias=1.1,
         ),
         MessageScene(
             text="漫长的冬夜张开巨大的羽翼，正在缓慢拥抱整座城市。",
-            conditions=[MonthCondition({12})],
+            conditions=[MonthCondition(months={12})],
+            bias=1.1,
         ),
         MessageScene(
             text="这一年的故事快要写到宏大的结尾了，愿你收尾得温柔。",
-            conditions=[MonthCondition({12})],
+            conditions=[MonthCondition(months={12})],
+            bias=1.1,
+        ),
+        # 1月14日: 日记情人节
+        MessageScene(
+            text="新一年的故事刚刚落笔，而你是最想被写进扉页的那行诗。",
+            conditions=[FestivalCondition(festival_names={"日记情人节"}, weight=10.0)],
+        ),
+        # 2月14日: 传统情人节
+        MessageScene(
+            text="玫瑰与晚霞撞了个满怀，连风里都藏着不小心走漏的爱意。",
+            conditions=[
+                FestivalCondition(festival_names={"传统情人节", "情人节"}, weight=10.0)
+            ],
+        ),
+        # 3月14日: 白色情人节
+        MessageScene(
+            text="春风裁出未完的蜜意，今天的日光，正加倍奉还浪漫。",
+            conditions=[FestivalCondition(festival_names={"白色情人节"}, weight=10.0)],
+        ),
+        # 4月14日: 黑色情人节
+        MessageScene(
+            text="哪怕是独处的夜，也有星光在热烈。今天，单身贵族万岁。",
+            conditions=[FestivalCondition(festival_names={"黑色情人节"}, weight=10.0)],
+        ),
+        # 5月14日: 玫瑰情人节
+        MessageScene(
+            text="空气里浮动着隐秘的香气，有一朵花，正为你悄然盛开。",
+            conditions=[FestivalCondition(festival_names={"玫瑰情人节"}, weight=10.0)],
+        ),
+        # 6月14日: 电影情人节
+        MessageScene(
+            text="光影在银幕上错落，而我只想在转头时，捕捉你眼中的微光。",
+            conditions=[FestivalCondition(festival_names={"电影情人节"}, weight=10.0)],
+        ),
+        # 7月14日: 银色情人节
+        MessageScene(
+            text="盛夏的夜空拉开帷幕，月色在此刻化作了最温柔的注视。",
+            conditions=[FestivalCondition(festival_names={"银色情人节"}, weight=10.0)],
+        ),
+        # 8月14日: 绿色情人节
+        MessageScene(
+            text="蝉鸣深处的森林里，风穿过树叶，带来最干净的安宁。",
+            conditions=[FestivalCondition(festival_names={"绿色情人节"}, weight=10.0)],
+        ),
+        # 9月14日: 音乐情人节
+        MessageScene(
+            text="旋律流淌成无形的河流，当音符与心跳重合，那是思念的信号。",
+            conditions=[FestivalCondition(festival_names={"音乐情人节"}, weight=10.0)],
+        ),
+        # 10月14日: 葡萄酒情人节
+        MessageScene(
+            text="秋意微醺，晚霞醇厚。在这个黄昏，有些情绪正静静发酵。",
+            conditions=[
+                FestivalCondition(festival_names={"葡萄酒情人节"}, weight=10.0)
+            ],
+        ),
+        # 11月14日: 橙色/电影情人节
+        MessageScene(
+            text="初冬干燥的空气里，甜橙的酸甜，是今天最妥帖的慰藉。",
+            conditions=[FestivalCondition(festival_names={"电影情人节"}, weight=10.0)],
+        ),
+        # 12月14日: 拥抱情人节
+        MessageScene(
+            text="寒风吹硬了大地，但彼此的体温，能消融一整个冬天的荒凉。",
+            conditions=[FestivalCondition(festival_names={"拥抱情人节"}, weight=10.0)],
+        ),
+        # 5月20日 / 5月21日：网络情人节
+        MessageScene(
+            text="信息海里浮动着千言万语，而这一秒，那三个字正跨越频段向你奔来。",
+            conditions=[
+                FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="屏幕投射出冷白的光，但今天，心跳的温度却比任何时候都炽热。",
+            conditions=[
+                FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="风在日历里翻到了最温柔的一页，连空气里都藏着揉碎的爱意。",
+            conditions=[
+                FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
+            ],
+        ),
+        # 10月24日：程序员节
+        MessageScene(
+            text="屏幕上的代码在冷光中跳动，而在这个特殊的节点，愿你能按下暂停键，听听心跳的声音。",
+            bias=1.2,
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageScene(
+            text="在0与1组成的代码宇宙里，逻辑严丝合缝。但唯有你，是我程序里唯一的、温柔的溢出错误。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageScene(
+            text="今天，让高并发的线程暂时休眠，去听听代码之外的生活流速。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageScene(
+            text="任由版本如何更迭，你是我时光轴上，唯一不曾更改的提交。",
+            conditions=[FestivalCondition(festival_names={"程序员节"}, weight=50.0)],
+        ),
+        MessageScene(
+            text="冰冷的硅基芯片里，正有一束微小的电流，为了你而微微发烫。",
+            conditions=[FestivalCondition(festival_names={"程序员节"}, weight=50.0)],
+        ),
+        # 6月18日 / 11月11日 / 12月12日：三大电商大促节
+        MessageScene(
+            text="包裹总会如期而至，但此刻，愿你先握住手边一杯热茶的质感。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"电商年中大促", "双十一", "双十二"}, weight=10.0
+                )
+            ],
+        ),
+        MessageScene(
+            text="清单可以被不断填满，而真正的充实，往往来自内心的留白。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"电商年中大促", "双十一", "双十二"}, weight=10.0
+                )
+            ],
+        ),
+        MessageScene(
+            text="一个人跑通的脚本，和走过的林荫路一样，拥有最纯粹的逻辑美。",
+            conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+        ),
+        MessageScene(
+            text="宇宙的流速完全由你掌控，今天，连指针的跳动都格外轻盈。",
+            conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+        ),
+        # 小年
+        MessageScene(
+            text="灶台烟火慢慢升腾，空气里有了糖瓜的甜味，年味兜兜转转，终于推开了家门。",
+            conditions=[FestivalCondition(festival_names={"南小年"}, weight=10.0)],
+        ),
+        MessageScene(
+            text="尘土随风散落，岁末的洗礼，正在不动声色地整理着生活的秩序。",
+            conditions=[FestivalCondition(festival_names={"南小年"}, weight=10.0)],
         ),
     ],
     greetings={
@@ -387,6 +534,172 @@ ROMANTIC_STYLE = MessagePack(
         MessageTone(
             header="每一张报表都在试图称重你的这一天，而你明白，真正属于你自己的生活从来不会被写进总结里。觉得困顿了，就立刻站起来拍拍衣角，去茶水间闻闻咖啡的香气。请心安理得地为自己私垦出一块秘密花园，别老在工位里消耗了生命力。",
             footer="用这些细碎的停顿去化解宏大的规训，在既定的世界里，你才是那个决定风向的岛主。祝所有懂得在缝隙里呼吸的人，都能拥有被温柔包裹的每一天。",
+        ),
+        MessageTone(
+            header="顺着这缕悄然蔓延的平静看过去，日常的琐碎总像是一场无止境的拉力赛，我们习惯了看表、看KPI、看闪烁的屏幕。但在今天，宏大的世界似乎在刻意缩小，缩小成一束花、一封信，或者某个名字在心头微微引起的震颤。",
+            footer="世界很大，但今天的温柔很小，小到刚刚好能装进你的口袋。愿你有人可爱，有梦可做，哪怕只是在心里。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={
+                        "日记情人节",
+                        "传统情人节",
+                        "情人节",
+                        "白色情人节",
+                        "黑色情人节",
+                        "玫瑰情人节",
+                        "电影情人节",
+                        "银色情人节",
+                        "绿色情人节",
+                        "音乐情人节",
+                        "葡萄酒情人节",
+                        "拥抱情人节",
+                        "网络情人节",
+                    },
+                    weight=10.0,
+                )
+            ],
+        ),
+        MessageTone(
+            header="在这个泛起涟漪的瞬间，四周原本紧绷的空气似乎也跟着松弛了下来。生活的钟表总是走得太急，催促着我们去应付堆积的邮件、开不完的会议和隐形的压力。但在今天，日子仿佛特意留出了一行空白，提醒我们在赶路的同时，也别忘了看看路边正开得热烈的花。",
+            footer="生活不是只有轨道，还有随心所欲的旷野。哪怕今天的工作再满，也请给自己留出喝一杯茶、发五分钟呆的私人旷野。对自己温柔，才是最高级的浪漫。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={
+                        "日记情人节",
+                        "传统情人节",
+                        "情人节",
+                        "白色情人节",
+                        "黑色情人节",
+                        "玫瑰情人节",
+                        "电影情人节",
+                        "银色情人节",
+                        "绿色情人节",
+                        "音乐情人节",
+                        "葡萄酒情人节",
+                        "拥抱情人节",
+                        "网络情人节",
+                    },
+                    weight=10.0,
+                )
+            ],
+        ),
+        MessageTone(
+            header="看着这一幕在眼前缓慢定格，不得不感叹时间的流速总是因人而异。在庞大的工作体制中，时间被精确地切割成按部就班的钟点，严丝合缝得让人喘不过气。然而在今天，那些写在日历上的节日，就像是精密齿轮箱里掉进的一枚玫瑰花瓣，让宏大的秩序出现了一道温柔的裂缝。",
+            footer="那是属于你自己的时间，是在精密的缝隙里偷来的一缕风。请心安理得地将它收藏，愿你今天在冰冷的规则里，握住属于自己的滚烫。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={
+                        "日记情人节",
+                        "传统情人节",
+                        "情人节",
+                        "白色情人节",
+                        "黑色情人节",
+                        "玫瑰情人节",
+                        "电影情人节",
+                        "银色情人节",
+                        "绿色情人节",
+                        "音乐情人节",
+                        "葡萄酒情人节",
+                        "拥抱情人节",
+                        "网络情人节",
+                    },
+                    weight=10.0,
+                )
+            ],
+        ),
+        MessageTone(
+            header="在这个由键盘与屏幕搭建的坐标系里，冷冰冰的编译器只认对错。然而，当你的手指偶然在键盘上悬停，任由思想在空气中逃逸三秒钟，那些按部就班的算法和紧绷的逻辑，就在此刻出现了一道温柔的溢出错误。",
+            footer="你才是自己生活的主脑。在那些被精确计算的代码日子里，请允许自己偶尔脱轨，去拥抱真实的、没有逻辑的浪漫。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="看着屏幕上闪烁的光斑，不得不惊叹于指尖下的魔力。无数行的字符交织，在黑暗中构建起现代社会庞大的数字帝国。在这个充满规则却又无限自由的开源世界里，我们既是严谨的工匠，也是天马行空的造物主，用一行行逻辑去改变着无数人的附近。",
+            footer="世界因你的探索而变得更高效，但请别忘了给自己的灵魂留一个开源的接口。愿你出走半生，归来时逻辑依旧清晰，心中依旧滚烫。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="顺着指针的落点望过去，生活就像是一场永无止境的迭代。我们在不断地冲突、合并、回滚，试图让日常的运行更加完美，甚至习惯了用一份份日志来定义自己的成长。但在今天这个专属的节点，那些杂乱的分支似乎都找到了归宿，所有的追寻，都指向了同一个最初的起点。",
+            footer="生活不需要完美的 `main` 分支，那些磕磕绊绊的变更，才是最真实的风景。今天，保存你的进度，允许自己暂时脱离严丝合缝的轨道，去和具体的浪漫打个招呼。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="在这个泛起涟漪的瞬间，四周冰冷的数字信号似乎也有了温度。每天，我们都在处理着海量的数据包，通过冷冰冰的路由与交换，将情绪封装、打包、发送。而在这个特别的坐标里，宏大的互联网仿佛退化成了一条最古老的串口线，让每一次真诚的投射，都能收到毫无延迟的确认应答。",
+            footer="在这个信息爆炸的时代，高带宽也比不上一个懂得的眼神。愿你今天的世界没有丢包，没有阻塞，在精密的数字洪流中，稳稳握住属于你的那份具象的偏爱。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="看着机箱里闪烁的微光，不得不叹服于这片微观世界的奇妙。电荷在严密的晶体管间穿梭，将逻辑具象为速度，将思考固化为永恒。在这个被精密计算统治的清晨与黑夜，我们虽然整天与冰冷的机器打交道，但别忘了，正是由于我们手指的温度，才赋予了这堆硅片改变世界的力量。",
+            footer="系统总会折旧，芯片总会迭代，但你对这个世界最初的敏锐与温柔，永远不会折旧。1024 程序员节，愿你眼里有星辰，指尖有乾坤，不负极客的理想与热爱。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="在这个被数据和指标包裹的节点，四周紧绷的秩序似乎悄然出现了一丝松动。我们习惯了用算法去寻找效率最高的路径，用模型去预测未来的走向，在不断收敛的损失函数里追求极致的精确。然而生活的妙处就在于，最珍贵的情感和最心动的瞬间，往往无法被任何公式化简，也不遵循任何预设的梯度。",
+            footer="人生不是一场冷冰冰的模拟进化，那些没有逻辑的直觉、没有意义的停顿，才是生命最美的留白。今天，停止你大脑的超频运转，心安理得地去享受一场毫无目的的浪费吧。",
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="顺着这缕破空而来的电波望过去，在这个被各种通知、算法和数据填满的数字世界里，我们每天都在接收着数不清的噪音。但在今天，520 这个特殊的代码，就像是一个天然的频率滤波器，让所有嘈杂的背景音悄然隐去，只留下最纯粹、最具体的牵挂。",
+            footer="网络会拥堵，信号会衰减，但爱你的频段永远高可用。愿你在这个充满数字的代码日子里，握住身边最真实的温度。",
+            conditions=[
+                FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
+            ],
+        ),
+        MessageTone(
+            header="看着这一幕在眼前缓慢定格，不得不承认，我们需要一些浪漫的节点来对抗日常的平庸。那些平时说不出口的浪漫、被深藏的关心，都在今天找到了最理直气壮的出口。世界很大，人潮汹涌，但在这个特别的坐标里，有些偏爱不需要任何逻辑，也同样坚不可摧。",
+            footer="浪漫不是两个人的特权，爱自己是终身浪漫的开始。愿你今天有人可奔赴，亦有底气盛开，祝你在这个温柔的日子里，身心舒畅。",
+            conditions=[
+                FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
+            ],
+        ),
+        MessageTone(
+            header="看着工位上略显疲惫却依旧运转的自己，不得不佩服打工人的韧性。我们总是在精密的账单里精打细算，在生活的考卷里努力交出满分的答案。然而，在这个全网都在计算满减方案的特殊节点，生活其实并不需要那么完美的算法，偶尔算错一次、放纵一次也无妨。",
+            footer="购物车可以满减，但给自己的爱必须是满额。今天的工作请允许自己适度‘摸鱼’，多喝水、多按按酸痛的肩膀，祝你今天好心情。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"电商年中大促", "双十一", "双十二"}, weight=10.0
+                )
+            ],
+        ),
+        MessageTone(
+            header="顺着这行留白看过去，日常的节奏总是被塞得太满。我们习惯了不断叠加需求、囤积物品、追逐风向，仿佛停下来就会被时代的潮水抛下。但在今天这个全民狂欢的镜像里，不妨反向思考一下，那些真正能让我们在紧绷的日常里感到松弛的，究竟是拥有更多，还是放下更多？",
+            footer="最好的生活预设，是给灵魂做一次温柔的垃圾回收。愿你在这个喧嚣的坐标里，清空繁杂的杂念，只留下最轻盈、最纯粹的自己。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"电商年中大促", "双十一", "双十二"}, weight=10.0
+                )
+            ],
+        ),
+        MessageTone(
+            header="在这种自给自足的秩序里，四周原本嘈杂的噪音似乎也跟着安静了下来。外面到处都在兜售成双成对的圆满，贩卖错失的焦虑。但在起身的刹那，在独自倒水、悬停键盘的几十步里，你拥有的是一整片完整的宇宙——不需要迁就谁的步调，也不需要向任何人妥协。",
+            footer="一个人的浪漫是隐秘的烟火，不需要观众，也足够热烈。今天，连空气里的风都只为你一个人转弯，请心安理得地享用这份只属于你自己的钟点。",
+            conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+        ),
+        MessageTone(
+            header="看着眼前的这份平静定格，生活最松弛的状态莫过于此。我们花了太多时间去满足社会的期待、维持精密的社交，却常常忘了把最珍贵的偏爱留给自己。今天的日历留出了一行空白，不是为了让你等待谁来填补，而是提醒你，你本身就是最完美的闭环。",
+            footer="圆满不是两个人的特权，内心笃定才是最高级的安全感。愿你今天有人可奔赴，亦有底气独自盛开，祝你在这个自由的日子里，活得舒展、搞钱快乐！",
+            conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+        ),
+        MessageTone(
+            header="顺着这缕悄然蔓延的烟火气望过去，岁末的钟声已经敲响，这一年的风尘仆仆也终于走到了要落款的时刻。小年一到，那些堆积的邮件、开不完的会议和紧绷的KPI，似乎都在无形中退居幕后，取而代之的是街头红起来的灯笼，和心里按捺不住的归途期盼。",
+            footer="二十三糖瓜粘，二十四扫房子。在这场盛大的除旧迎新里，愿你拍落一年积压的疲惫，好好犒劳辛苦了许久的自己。听，春天的序曲已经奏响了。",
+            conditions=[FestivalCondition(festival_names={"南小年"}, weight=10.0)],
+        ),
+        MessageTone(
+            header="看着眼前这抹逐渐清晰的平静，不得不承认，我们需要这样一个传统的节点来按下暂停键。古人在这一天祭灶王、扫尘土，其实是在给紧绷了一整年的一生找一个理直气壮的出口，去清空那些冗余的负担，让日常的轨道重新焕发出最初的质感。",
+            footer="扫尘除旧，不仅是物理上的清理，更是给自己的灵魂做一次完美的垃圾回收。愿你清空积压的负累，装满对新岁的欢喜。小年快乐，愿你所得皆所愿。",
+            conditions=[FestivalCondition(festival_names={"南小年"}, weight=10.0)],
         ),
     ],
 )

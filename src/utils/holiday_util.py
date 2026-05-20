@@ -2,7 +2,8 @@ import datetime
 import requests
 from typing import Any
 from chinese_calendar import is_workday, get_holiday_detail
-from core.message.day_status import DayStatus
+from core.calendar.models.day_status import DayStatus
+from utils.calendar_util import CalendarUtil
 from utils.logger import setup_logger
 
 log = setup_logger("Holiday")
@@ -36,12 +37,14 @@ class HolidayUtil:
             target_date = target_date.date()
 
         is_holiday_flag, holiday_name = get_holiday_detail(target_date)
-
+        
+        festival_names = CalendarUtil.get_all_festival_names(target_date)
         return DayStatus(
             date=target_date,
             is_workday=is_workday(target_date),
             is_holiday=is_holiday_flag,
             holiday_name=holiday_name,
+            festival_names=festival_names,
             is_weekend=target_date.weekday() >= 5,
             weekday_cn_short=HolidayUtil.get_weekday_cn_short(target_date),
         )
@@ -89,6 +92,7 @@ class HolidayUtil:
             raise ValueError(f"Invalid API response: {data}")
         log.info(f"API response: {data}")
         items = data["result"].get("list", [])
+        festival_names = CalendarUtil.get_all_festival_names(target_date)
         if not items:
             return DayStatus(
                 date=target_date,
@@ -98,6 +102,7 @@ class HolidayUtil:
                 is_workday=target_date.weekday() < 5,
                 is_holiday=False,
                 holiday_name=None,
+                festival_names=festival_names,
             )
 
         item = items[0]
@@ -113,4 +118,5 @@ class HolidayUtil:
             is_workday=not is_holiday_flag,
             is_holiday=is_holiday_flag,
             holiday_name=holiday_name,
+            festival_names=festival_names,
         )

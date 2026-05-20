@@ -1,24 +1,21 @@
 import datetime
+import random
 
-from core.style import (
-    YearStats,
-    MessageStyle,
-    MessagePack,
-    STYLE_REGISTRY,
-)
+from core.enums import MessageStyle, FestivalPushMode
 
-from core.message.context import MessageContext
+from core.message.models import MessagePack, YearStats, MessageContext
 from core.message.renderer import MessageRenderer
 
-from core.message.day_status import DayStatus
-from core.message.weekend_status import (
+from core.message.styles.registry import STYLE_REGISTRY
+
+from core.calendar.models import (
+    DayStatus,
+    Festival,
     WeekendStatus,
     TomorrowStatus,
     FridayStatus,
     NextFridayStatus,
 )
-
-from core.festival import filter_festivals
 
 from utils.calendar_util import CalendarUtil
 from utils.holiday_util import HolidayUtil
@@ -73,6 +70,25 @@ class MessageComposer:
         )
 
     @staticmethod
+    def filter_festivals(
+        festivals: tuple[Festival, ...],
+        mode: FestivalPushMode,
+    ) -> tuple[Festival, ...]:
+        enabled = tuple(festival for festival in festivals if festival.enabled)
+        if mode == FestivalPushMode.RANDOM:
+            mode = random.choice(
+                [
+                    FestivalPushMode.ALL,
+                    FestivalPushMode.PUBLIC_HOLIDAYS_ONLY,
+                ]
+            )
+        if mode == FestivalPushMode.ALL:
+            return enabled
+        if mode == FestivalPushMode.PUBLIC_HOLIDAYS_ONLY:
+            return tuple(festival for festival in enabled if festival.is_public_holiday)
+        return enabled
+
+    @staticmethod
     def compose(
         day_status: DayStatus,
         business_time: datetime.datetime,
@@ -95,7 +111,7 @@ class MessageComposer:
             business_date,
         )
 
-        filtered_festivals = filter_festivals(
+        filtered_festivals = MessageComposer.filter_festivals(
             settings.festivals,
             settings.festival_push_mode,
         )

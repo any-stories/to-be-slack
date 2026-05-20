@@ -1,16 +1,56 @@
 import datetime
 import calendar
 from borax.calendars.lunardate import LunarDate, TermUtils
+from borax.calendars.festivals2 import FestivalLibrary, SolarFestival, LunarFestival
 
-from core.festival import (
-    Festival,
-    FestivalType,
-)
+from core.enums import FestivalType
+from core.calendar.models import Festival
+
 from utils.logger import setup_logger
 
 log = setup_logger("calendar")
 
+
 class CalendarUtil:
+
+    _festival_lib = None
+
+    @classmethod
+    def _get_festival_lib(cls) -> FestivalLibrary:
+        if cls._festival_lib is None:
+            cls._festival_lib = FestivalLibrary.load_builtin()
+            valentine_months = {
+                1: "日记情人节",
+                2: "传统情人节",
+                3: "白色情人节",
+                4: "黑色情人节",
+                5: "玫瑰情人节",
+                6: "电影情人节",
+                7: "银色情人节",
+                8: "绿色情人节",
+                9: "音乐情人节",
+                10: "葡萄酒情人节",
+                11: "电影情人节",
+                12: "拥抱情人节",
+            }
+
+            monthly_valentines = [
+                SolarFestival(month=m, day=14, name=name)
+                for m, name in valentine_months.items()
+            ]
+            custom_festivals = [
+                SolarFestival(month=10, day=24, name="程序员节"),
+                SolarFestival(month=5, day=20, name="网络情人节"),
+                SolarFestival(month=6, day=18, name="电商年中大促"),
+                SolarFestival(month=11, day=11, name="双十一"),
+                SolarFestival(month=12, day=12, name="双十二"),
+                SolarFestival(month=3, day=7, name="女生节"),
+                SolarFestival(month=11, day=11, name="光棍节"),
+                LunarFestival(month=12, day=23, name="北小年"),
+                LunarFestival(month=12, day=24, name="南小年"),
+            ]
+            cls._festival_lib.extend(monthly_valentines + custom_festivals)
+        return cls._festival_lib
 
     @staticmethod
     def normalize_date(
@@ -85,6 +125,21 @@ class CalendarUtil:
     ) -> LunarDate:
         target = CalendarUtil.normalize_date(date_value)
         return LunarDate.from_solar(target)
+
+    @staticmethod
+    def get_all_festival_names(target_date: datetime.date) -> list[str]:
+        names = []
+        try:
+
+            lib = CalendarUtil._get_festival_lib()
+            names.extend(lib.get_festival_names(target_date))
+
+            # 节气
+            # lunar_date = LunarDate.from_solar_date(target_date)
+        except Exception as e:
+            log.error(f"Failed to get festival names for {target_date}: {e}")
+
+        return names
 
     @classmethod
     def get_upcoming_festivals(

@@ -10,7 +10,7 @@ import yaml
 from config import settings
 
 from core.message.composer import MessageComposer
-from core.message.day_status import DayStatus
+from core.calendar.models.day_status import DayStatus
 
 from notification.channel.wecom import WeComBot, WeComMarkdown
 

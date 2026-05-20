@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 
-from core.style.season import Season
-from core.style.condition.base_condition import BaseCondition
-from core.message.context import MessageContext
+from core.enums.season import Season
+from core.message.conditions.condition import Condition
+from core.message.models.context import MessageContext
 
 
 def month_to_season(month: int) -> Season:
@@ -15,8 +15,8 @@ def month_to_season(month: int) -> Season:
     return Season.WINTER
 
 
-@dataclass(slots=True)
-class SeasonCondition(BaseCondition):
+@dataclass(slots=True, kw_only=True)
+class SeasonCondition(Condition):
     seasons: set[Season]
 
     def matches(self, context: MessageContext) -> bool:
