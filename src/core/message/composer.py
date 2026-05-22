@@ -41,7 +41,7 @@ class MessageComposer:
         Get weekend related status information.
         """
 
-        friday = CalendarUtil.get_friday_of_week(today)
+        friday = CalendarUtil.get_week_friday(today)
 
         tomorrow_date = today + datetime.timedelta(days=1)
         tomorrow_status = HolidayUtil.get_day_status(tomorrow_date)

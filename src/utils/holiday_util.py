@@ -38,7 +38,7 @@ class HolidayUtil:
 
         is_holiday_flag, holiday_name = get_holiday_detail(target_date)
         
-        festival_names = CalendarUtil.get_all_festival_names(target_date)
+        festival_names = CalendarUtil.get_festival_names(target_date)
         return DayStatus(
             date=target_date,
             is_workday=is_workday(target_date),
@@ -92,7 +92,7 @@ class HolidayUtil:
             raise ValueError(f"Invalid API response: {data}")
         log.info(f"API response: {data}")
         items = data["result"].get("list", [])
-        festival_names = CalendarUtil.get_all_festival_names(target_date)
+        festival_names = CalendarUtil.get_festival_names(target_date)
         if not items:
             return DayStatus(
                 date=target_date,

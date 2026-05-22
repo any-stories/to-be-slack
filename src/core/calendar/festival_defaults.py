@@ -3,7 +3,7 @@ from core.calendar.models.festival import Festival
 
 DEFAULT_FESTIVALS: tuple[Festival, ...] = (
     Festival(
-        name="元旦节", type=FestivalType.FIXED, month=1, day=1, is_public_holiday=True
+        name="元旦", type=FestivalType.FIXED, month=1, day=1, is_public_holiday=True
     ),
     Festival(
         name="春节", type=FestivalType.LUNAR, month=1, day=1, is_public_holiday=True

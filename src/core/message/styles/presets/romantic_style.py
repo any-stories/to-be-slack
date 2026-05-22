@@ -48,11 +48,43 @@ ROMANTIC_STYLE = MessagePack(
             conditions=[SeasonCondition(seasons={Season.SPRING})],
         ),
         MessageScene(
+            text="风里携着潮湿而柔软的泥土气，那是春天的信。",
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
+        ),
+        MessageScene(
+            text="窗外的枝丫，不知哪天起偷偷蓄满了绿意。",
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
+        ),
+        MessageScene(
+            text="细碎的春光漏过百叶窗，在桌上跳着短歌。",
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
+        ),
+        MessageScene(
+            text="微风吹过长街，空气里有花瓣爆裂的轻响。",
+            conditions=[SeasonCondition(seasons={Season.SPRING})],
+        ),
+        MessageScene(
             text="夏天的白昼总是格外任性，把黄昏拉得无限长。",
             conditions=[SeasonCondition(seasons={Season.SUMMER})],
         ),
         MessageScene(
             text="盛夏的滚烫热意，在空气里正横冲直撞。",
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
+        ),
+        MessageScene(
+            text="冷气机嗡嗡作响，把窗外的滚烫隔绝成默片。",
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
+        ),
+        MessageScene(
+            text="树荫被日光晒得浓稠，蝉鸣扯响了夏天的序幕。",
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
+        ),
+        MessageScene(
+            text="雷雨过后的傍晚，空气里有干净的青草香。",
+            conditions=[SeasonCondition(seasons={Season.SUMMER})],
+        ),
+        MessageScene(
+            text="冰块在玻璃杯里撞击，溅出盛夏特有的清凉。",
             conditions=[SeasonCondition(seasons={Season.SUMMER})],
         ),
         MessageScene(
@@ -64,11 +96,43 @@ ROMANTIC_STYLE = MessagePack(
             conditions=[SeasonCondition(seasons={Season.AUTUMN})],
         ),
         MessageScene(
-            text="冬天大刀阔斧地剥离了喧嚣，让整个世界安静得像一幅画。",
+            text="落叶在沥青路面上沙沙作响，秋天踩着步子来了。",
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
+        ),
+        MessageScene(
+            text="阳光开始变得克制，连影子都被拉得细长。",
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
+        ),
+        MessageScene(
+            text="空气里浮动着糖炒栗子和落叶的微苦香气。",
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
+        ),
+        MessageScene(
+            text="高远的天空一片澄蓝，连风都变得格外慷慨。",
+            conditions=[SeasonCondition(seasons={Season.AUTUMN})],
+        ),
+        MessageScene(
+            text="冬天剥离了喧嚣，让世界安静得像一幅画。",
             conditions=[SeasonCondition(seasons={Season.WINTER})],
         ),
         MessageScene(
-            text="空气里那抹极淡的寒意，让清晨的呼吸都变得清澈。",
+            text="空气里极淡的寒意，让呼吸都变得清澈。",
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
+        ),
+        MessageScene(
+            text="呵出的白气刚升空，就散在了凛冽的冬日里。",
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
+        ),
+        MessageScene(
+            text="落日陷进远处的灰色楼宇，沉得格外安静。",
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
+        ),
+        MessageScene(
+            text="冬天的风像个急性子，粗鲁地扯紧人们的衣领。",
+            conditions=[SeasonCondition(seasons={Season.WINTER})],
+        ),
+        MessageScene(
+            text="玻璃窗蒙上了一层白雾，世界被晕染得模糊模糊。",
             conditions=[SeasonCondition(seasons={Season.WINTER})],
         ),
         # 月份场景
@@ -83,6 +147,10 @@ ROMANTIC_STYLE = MessagePack(
         MessageScene(
             text="岁月的长卷，正极其缓慢地展开新一年的第一页。",
             conditions=[MonthCondition(months={1})],
+        ),
+        MessageScene(
+            text="冬天的尾巴里，已经能嗅到微弱的春意。",
+            conditions=[MonthCondition(months={2})],
         ),
         MessageScene(
             text="二月的空气里，回暖的春意正在泥土下悄悄排练。",
@@ -282,6 +350,36 @@ ROMANTIC_STYLE = MessagePack(
                 FestivalCondition(festival_names={"网络情人节", "520"}, weight=20.0)
             ],
         ),
+        MessageScene(
+            text="城市的灯火一路向远处蔓延，而今晚的月色，像是在替人间等待重逢。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="风从夏夜深处缓慢吹来，银河低垂，连思念都显得格外漫长。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="今夜的星空像被谁悄悄擦亮了，万千灯火之间，总有人正在奔赴团圆。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="蝉鸣渐弱，晚风微凉，夏夜终于把最温柔的一面留给了重逢的人。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageScene(
+            text="长街依旧车水马龙，而天上的银河，也仍在年复一年地等待相见。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
         # 10月24日：程序员节
         MessageScene(
             text="屏幕上的代码在冷光中跳动，而在这个特殊的节点，愿你能按下暂停键，听听心跳的声音。",
@@ -304,11 +402,15 @@ ROMANTIC_STYLE = MessagePack(
         ),
         MessageScene(
             text="任由版本如何更迭，你是我时光轴上，唯一不曾更改的提交。",
-            conditions=[FestivalCondition(festival_names={"程序员节"}, weight=50.0)],
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
         ),
         MessageScene(
             text="冰冷的硅基芯片里，正有一束微小的电流，为了你而微微发烫。",
-            conditions=[FestivalCondition(festival_names={"程序员节"}, weight=50.0)],
+            conditions=[
+                FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
         ),
         # 6月18日 / 11月11日 / 12月12日：三大电商大促节
         MessageScene(
@@ -330,10 +432,12 @@ ROMANTIC_STYLE = MessagePack(
         MessageScene(
             text="一个人跑通的脚本，和走过的林荫路一样，拥有最纯粹的逻辑美。",
             conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+            bias=0.60,
         ),
         MessageScene(
             text="宇宙的流速完全由你掌控，今天，连指针的跳动都格外轻盈。",
             conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
+            bias=0.60,
         ),
         # 小年
         MessageScene(
@@ -540,21 +644,7 @@ ROMANTIC_STYLE = MessagePack(
             footer="世界很大，但今天的温柔很小，小到刚刚好能装进你的口袋。愿你有人可爱，有梦可做，哪怕只是在心里。",
             conditions=[
                 FestivalCondition(
-                    festival_names={
-                        "日记情人节",
-                        "传统情人节",
-                        "情人节",
-                        "白色情人节",
-                        "黑色情人节",
-                        "玫瑰情人节",
-                        "电影情人节",
-                        "银色情人节",
-                        "绿色情人节",
-                        "音乐情人节",
-                        "葡萄酒情人节",
-                        "拥抱情人节",
-                        "网络情人节",
-                    },
+                    festival_keywords={"情人节"},
                     weight=10.0,
                 )
             ],
@@ -564,21 +654,7 @@ ROMANTIC_STYLE = MessagePack(
             footer="生活不是只有轨道，还有随心所欲的旷野。哪怕今天的工作再满，也请给自己留出喝一杯茶、发五分钟呆的私人旷野。对自己温柔，才是最高级的浪漫。",
             conditions=[
                 FestivalCondition(
-                    festival_names={
-                        "日记情人节",
-                        "传统情人节",
-                        "情人节",
-                        "白色情人节",
-                        "黑色情人节",
-                        "玫瑰情人节",
-                        "电影情人节",
-                        "银色情人节",
-                        "绿色情人节",
-                        "音乐情人节",
-                        "葡萄酒情人节",
-                        "拥抱情人节",
-                        "网络情人节",
-                    },
+                    festival_keywords={"情人节"},
                     weight=10.0,
                 )
             ],
@@ -588,22 +664,40 @@ ROMANTIC_STYLE = MessagePack(
             footer="那是属于你自己的时间，是在精密的缝隙里偷来的一缕风。请心安理得地将它收藏，愿你今天在冰冷的规则里，握住属于自己的滚烫。",
             conditions=[
                 FestivalCondition(
-                    festival_names={
-                        "日记情人节",
-                        "传统情人节",
-                        "情人节",
-                        "白色情人节",
-                        "黑色情人节",
-                        "玫瑰情人节",
-                        "电影情人节",
-                        "银色情人节",
-                        "绿色情人节",
-                        "音乐情人节",
-                        "葡萄酒情人节",
-                        "拥抱情人节",
-                        "网络情人节",
-                    },
+                    festival_keywords={"情人节"},
                     weight=10.0,
+                )
+            ],
+        ),
+        MessageTone(
+            header="顺着这片缓慢降临的夜色望过去，城市依旧在高楼与霓虹之间高速运转。无数人低头赶路，忙着回复消息、核对日程、追赶下一班地铁，仿佛生活从不给情绪留下停顿的余地。但在今晚，银河像是忽然低垂了一寸，那些被日常折叠起来的思念、等待与偏爱，也终于拥有了被认真提起的理由。",
+            footer="爱从来不是脱离现实的童话，而是在庞大世界里，依然愿意为某个人留出一盏灯。愿你今夜有人可想，有人可见，也有人正穿越漫长人海，向你奔赴而来。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageTone(
+            header="看着夜空一点点暗下来，忽然会觉得，有些古老的浪漫从未真正离开过。人们依旧在钢筋水泥之间奔波，在无数精准的时间表里压缩生活，可每当七夕到来，城市上空那条传说中的银河，还是会让许多人下意识地抬头。原来再理性的成年人，心里也始终给重逢与偏爱留着位置。",
+            footer="世界总在催促人向前走，但爱意偏偏擅长让时间慢下来。愿你今晚的月色刚好，晚风温柔，也愿你等待的人，终会跨越漫长岁月来到你身边。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageTone(
+            header="日常总像一场无止境的拉力赛，我们习惯了盯着跳动的数字、未读的消息和写不完的任务，把情绪压缩进一格格精确的日程里。可在今晚，城市似乎终于愿意把脚步放慢一点。有人捧着花穿过晚高峰，有人在聊天框里反复删改一句晚安，也有人只是安静地站在夜风里，想念一个很久没见的人。",
+            footer="原来再庞大的生活，也需要这样一个允许人温柔失控的夜晚。愿你不必总是清醒克制，在今夜的银河与灯火之间，安心去爱，安心被爱。",
+            conditions=[
+                FestivalCondition(festival_names={"七夕节", "七夕"}, weight=20.0)
+            ],
+        ),
+        MessageTone(
+            header="晚高峰的人潮还在城市里缓慢流动，有人抱着花赶路，有人反复删改一句晚安。生活总催着人往前走，可到了今晚，好像所有藏起来的想念，都终于拥有了被认真提起的理由。",
+            footer="愿今晚有人陪你吹晚风，也愿你一个人的时候，同样觉得人间温柔。",
+            bias=2.0,
+            conditions=[
+                FestivalCondition(
+                    festival_names={"七夕节", "七夕"},
+                    weight=20.0,
                 )
             ],
         ),
@@ -612,6 +706,17 @@ ROMANTIC_STYLE = MessagePack(
             footer="你才是自己生活的主脑。在那些被精确计算的代码日子里，请允许自己偶尔脱轨，去拥抱真实的、没有逻辑的浪漫。",
             conditions=[
                 FestivalCondition(festival_names={"程序员节", "1024"}, weight=50.0)
+            ],
+        ),
+        MessageTone(
+            header="屏幕上的字符还在不停滚动，深夜的办公室依旧亮着几盏没关的灯。我们总在修复 bug、追赶版本、和时间赛跑，可真正让代码拥有温度的，从来不是逻辑本身，而是敲下键盘时，那份认真生活的热爱。",
+            footer="愿你永远保留探索世界的好奇，也别忘了在密密麻麻的代码之外，好好生活。",
+            bias=1.7,
+            conditions=[
+                FestivalCondition(
+                    festival_names={"程序员节", "1024"},
+                    weight=50.0,
+                )
             ],
         ),
         MessageTone(
@@ -650,6 +755,24 @@ ROMANTIC_STYLE = MessagePack(
             ],
         ),
         MessageTone(
+            header="满大街的玫瑰与成双成对的剪影，将今天的空气烘托得有些过分热烈。社交媒体上充斥着关于‘爱’的各种高调定义，仿佛在今天，每个人都必须加入这场盛大的浪漫游行才算及格。",
+            footer="其实，爱自己才是终身浪漫的开始。关掉那些让人焦虑的动态，摸鱼去给自己点一杯平时舍不得喝的点心。外界的洪流再大，你工位方圆一米内的松弛，才是你今天最踏实的归宿。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"情人节", "网络情人节", "七夕节"}, weight=15.0
+                )
+            ],
+        ),
+        MessageTone(
+            header="精密的城市在今天被涂上了一层粉色的滤镜，连空气里都浮动着隐秘的甜意。然而在写字楼里，格子间里的打卡声和键盘声依然清脆，浪漫的节日感正与紧绷的日常在狭路相逢。",
+            footer="那就借着节日的名义，在工位上光明正大地开个小差吧。起去走廊吹吹风，看看天边那抹刚好路过的晚霞。不用非得等谁来送花，这几分钟不被打扰的自由，就是你送给自己的最好礼物。",
+            conditions=[
+                FestivalCondition(
+                    festival_names={"情人节", "网络情人节", "七夕节"}, weight=15.0
+                )
+            ],
+        ),
+        MessageTone(
             header="顺着这缕破空而来的电波望过去，在这个被各种通知、算法和数据填满的数字世界里，我们每天都在接收着数不清的噪音。但在今天，520 这个特殊的代码，就像是一个天然的频率滤波器，让所有嘈杂的背景音悄然隐去，只留下最纯粹、最具体的牵挂。",
             footer="网络会拥堵，信号会衰减，但爱你的频段永远高可用。愿你在这个充满数字的代码日子里，握住身边最真实的温度。",
             conditions=[
@@ -664,6 +787,17 @@ ROMANTIC_STYLE = MessagePack(
             ],
         ),
         MessageTone(
+            header="消息提示音在夜里一遍遍亮起，很多藏了很久的话，也终于在今天变得顺理成章。这个世界每天都有无数信息飞速掠过，可真正让人心动的，始终还是那句被认真说出口的“我在想你”。",
+            footer="愿你今天收到期待已久的回应，也愿你的喜欢，永远有落点。",
+            bias=2.0,
+            conditions=[
+                FestivalCondition(
+                    festival_names={"网络情人节", "520"},
+                    weight=20.0,
+                )
+            ],
+        ),
+        MessageTone(
             header="看着工位上略显疲惫却依旧运转的自己，不得不佩服打工人的韧性。我们总是在精密的账单里精打细算，在生活的考卷里努力交出满分的答案。然而，在这个全网都在计算满减方案的特殊节点，生活其实并不需要那么完美的算法，偶尔算错一次、放纵一次也无妨。",
             footer="购物车可以满减，但给自己的爱必须是满额。今天的工作请允许自己适度‘摸鱼’，多喝水、多按按酸痛的肩膀，祝你今天好心情。",
             conditions=[
@@ -673,28 +807,43 @@ ROMANTIC_STYLE = MessagePack(
             ],
         ),
         MessageTone(
-            header="顺着这行留白看过去，日常的节奏总是被塞得太满。我们习惯了不断叠加需求、囤积物品、追逐风向，仿佛停下来就会被时代的潮水抛下。但在今天这个全民狂欢的镜像里，不妨反向思考一下，那些真正能让我们在紧绷的日常里感到松弛的，究竟是拥有更多，还是放下更多？",
-            footer="最好的生活预设，是给灵魂做一次温柔的垃圾回收。愿你在这个喧嚣的坐标里，清空繁杂的杂念，只留下最轻盈、最纯粹的自己。",
+            header="零点将近，很多人的购物车还停留在“再等等”和“就现在”之间。城市的灯光亮得很晚，快递消息、付款提醒、未读聊天一起挤进这个夜里。可比起凑满减，更重要的，或许是在忙碌生活里，认真奖励一次辛苦了很久的自己。",
+            footer="愿你今晚买到喜欢的东西，也别忘了把温柔和耐心，多留一点给自己。",
+            bias=1.6,
             conditions=[
                 FestivalCondition(
-                    festival_names={"电商年中大促", "双十一", "双十二"}, weight=10.0
+                    festival_names={"电商年中大促", "双十一", "双十二"},
+                    weight=10.0,
                 )
             ],
         ),
         MessageTone(
-            header="在这种自给自足的秩序里，四周原本嘈杂的噪音似乎也跟着安静了下来。外面到处都在兜售成双成对的圆满，贩卖错失的焦虑。但在起身的刹那，在独自倒水、悬停键盘的几十步里，你拥有的是一整片完整的宇宙——不需要迁就谁的步调，也不需要向任何人妥协。",
-            footer="一个人的浪漫是隐秘的烟火，不需要观众，也足够热烈。今天，连空气里的风都只为你一个人转弯，请心安理得地享用这份只属于你自己的钟点。",
+            header="一个人下班、吃饭、散步、听歌，其实从来都不算落单。城市总爱把热闹定义成圆满，可真正舒服的生活，往往是终于学会按照自己的节奏呼吸。今晚的风很轻，耳机里的歌刚好，连独处都显得格外自由。",
+            footer="愿你始终拥有爱人的能力，也永远保留好好爱自己的底气。",
+            bias=0.6,
+            conditions=[
+                FestivalCondition(
+                    festival_names={"光棍节"},
+                    weight=10.0,
+                )
+            ],
+        ),
+        MessageTone(
+            header="世界总爱把‘成双成对’当作圆满的标准，在这个节点用各种热闹来反衬形单影只的孤单。可当你下班走在长街上，看着路灯拉长自己的影子，会发现那种不被打扰的清爽，在这个城市里有多难得。",
+            footer="不需要配合任何人的步调，今晚的宇宙完全由你一人私有。推掉那些为了合群而强撑的应酬，安心享受属于自己的盲区。去听歌、去散步，按照自己的频率呼吸，单身也是最高级的浪漫。",
+            bias=0.6,
             conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
         ),
         MessageTone(
-            header="看着眼前的这份平静定格，生活最松弛的状态莫过于此。我们花了太多时间去满足社会的期待、维持精密的社交，却常常忘了把最珍贵的偏爱留给自己。今天的日历留出了一行空白，不是为了让你等待谁来填补，而是提醒你，你本身就是最完美的闭环。",
-            footer="圆满不是两个人的特权，内心笃定才是最高级的安全感。愿你今天有人可奔赴，亦有底气独自盛开，祝你在这个自由的日子里，活得舒展、搞钱快乐！",
-            conditions=[FestivalCondition(festival_names={"光棍节"}, weight=10.0)],
-        ),
-        MessageTone(
-            header="顺着这缕悄然蔓延的烟火气望过去，岁末的钟声已经敲响，这一年的风尘仆仆也终于走到了要落款的时刻。小年一到，那些堆积的邮件、开不完的会议和紧绷的KPI，似乎都在无形中退居幕后，取而代之的是街头红起来的灯笼，和心里按捺不住的归途期盼。",
-            footer="二十三糖瓜粘，二十四扫房子。在这场盛大的除旧迎新里，愿你拍落一年积压的疲惫，好好犒劳辛苦了许久的自己。听，春天的序曲已经奏响了。",
-            conditions=[FestivalCondition(festival_names={"南小年"}, weight=10.0)],
+            header="街边的小店开始挂起红灯笼，空气里也慢慢有了糖炒栗子和热汤的味道。那些写不完的消息、赶不完的进度，似乎终于在这个节点松了一口气。原来人真正期待的，从来不是节日本身，而是终于可以认真回家。",
+            footer="愿你把这一年的疲惫轻轻放下，也愿所有奔波的人，都能慢慢靠近团圆。",
+            bias=1.4,
+            conditions=[
+                FestivalCondition(
+                    festival_names={"南小年"},
+                    weight=10.0,
+                )
+            ],
         ),
         MessageTone(
             header="看着眼前这抹逐渐清晰的平静，不得不承认，我们需要这样一个传统的节点来按下暂停键。古人在这一天祭灶王、扫尘土，其实是在给紧绷了一整年的一生找一个理直气壮的出口，去清空那些冗余的负担，让日常的轨道重新焕发出最初的质感。",

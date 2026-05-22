@@ -109,6 +109,7 @@ def is_last_chance_today(crons: list[str], current_time: datetime.datetime) -> b
 
 
 def run() -> None:
+    # now_utc = datetime.datetime(2025, 10, 24, 0, 30, 0, tzinfo=datetime.UTC)
     now_utc = datetime.datetime.now(datetime.UTC)
     system_time = now_utc.astimezone()
     business_time = now_utc.astimezone(BUSINESS_TZ)
@@ -125,6 +126,7 @@ def run() -> None:
 
     today = business_time.date()
     today_status = HolidayUtil.get_day_status(today)
+    print(f"Day status: {today_status}")
     if not today_status.is_workday:
         log.info(f"Today ({today} is not a workday. skipping.")
         return
